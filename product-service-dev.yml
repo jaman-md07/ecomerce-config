@@ -20,9 +20,10 @@ spring:
     base-url: http://localhost:9411
     enabled: true
 
-  sleuth:
-    sampler:
-      probability: 1.0
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
 
 management:
   tracing:
@@ -33,13 +34,7 @@ management:
       exposure:
         include: "*"
 
-eureka:
-  client:
-    service-url:
-      defaultZone: http://localhost:8761/eureka
-
 logging:
   pattern:
     level: "%5p [${spring.application.name},%X{traceId},%X{spanId}]"
-
 
