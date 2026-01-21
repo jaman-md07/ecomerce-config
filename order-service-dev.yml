@@ -19,10 +19,18 @@ spring:
 
   kafka:
     bootstrap-servers: localhost:9092
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
 
   zipkin:
     base-url: http://localhost:9411
     enabled: true
+
+  cloud:
+    openfeign:
+      circuitbreaker:
+        enabled: true
 
 management:
   tracing:
@@ -32,6 +40,26 @@ management:
     web:
       exposure:
         include: "*"
+
+logging:
+  pattern:
+    level: "%5p [${spring.application.name},%X{traceId},%X{spanId}]"
+
+resilience4j:
+  circuitbreaker:
+    instances:
+      user-service:
+        slidingWindowSize: 10
+        failureRateThreshold: 50
+      product-service:
+        slidingWindowSize: 10
+        failureRateThreshold: 50
+      cart-service:
+        slidingWindowSize: 10
+        failureRateThreshold: 50
+      inventory-service:
+        slidingWindowSize: 10
+        failureRateThreshold: 50
 
 eureka:
   client:
