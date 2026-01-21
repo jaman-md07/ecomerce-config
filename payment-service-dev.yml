@@ -7,7 +7,7 @@ spring:
     name: payment-service
   
   datasource:
-    url: jdbc:mysql://localhost:3306/paymentdb
+    url: jdbc:mysql://localhost:3306/amazon
     username: root
     password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
