@@ -6,19 +6,15 @@ spring:
     name: product-service
 
   datasource:
-    url: jdbc:mysql://localhost:3306/amazon?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
-    username: ${DB_USERNAME:root}
-    password: ${DB_PASSWORD:root}
-    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/amazon
+    username: root
+    password: root
 
   jpa:
     hibernate:
       ddl-auto: update
     show-sql: true
-    open-in-view: false
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.MySQLDialect
+    open-in-view: false  # Fixes category name null issue
 
   zipkin:
     base-url: http://localhost:9411
@@ -41,5 +37,7 @@ management:
 logging:
   pattern:
     level: "%5p [${spring.application.name},%X{traceId},%X{spanId}]"
+
+
 
 
